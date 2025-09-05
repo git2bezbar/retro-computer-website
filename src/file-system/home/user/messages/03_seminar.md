@@ -9,12 +9,12 @@
 
 Message from Alessandro Massi
 
-I got some info about their next seminar. It will take place at Lalande Laborie, in Auriac-du-Perigord.
-Here is a picture of the location:
+J'ai obtenu des informations sur leur prochain séminaire. Il aura lieu à Lalande Laborie, à Auriac-du-Périgord.
+Voici une photo du lieu :
 
 !(/images/lalande.png?aspect=1)
 
-I think you can do your magic to steal the code right there. Someone in the tech team will leave his computer opened, it may be the perfect opportunity. Try to be as discreet as possible.
+Je pense que tu peux faire ton truc pour voler le code à cet endroit. Quelqu'un de l'équipe technique laissera son ordinateur allumé, ce sera peut-être l'occasion idéale. Essaie d'être aussi discret que possible.
 
 
 

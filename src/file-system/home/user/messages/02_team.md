@@ -10,7 +10,7 @@
 
 Message from Alessandro Massi
 
-Their technical team looks really strange. I suspect they're cult-like. Look at the photos, it makes me feel uneasy. Are you sure yo wanna steal their codebase?
+Leur équipe technique a l'air vraiment bizarre. Je les soupçonne de faire partie d'une secte. Regarde les photos, ça me met mal à l'aise. Tu es sûr de vouloir voler leur code source ?
 
 ## *Antoine Chassagne*
 

@@ -8,7 +8,7 @@
 
 
 # List of locations
-Here are the three last locations of your phone.
+Voici les dernières positions connues de votre téléphone.
 
 
 ## *Nansouty*
@@ -31,5 +31,5 @@ Here are the three last locations of your phone.
 
 !(/images/dordogne.png?aspect=1)
 
-Check your messages to have more info about the phone.
-### *Go to the messages directory to see them.*
+Vérifiez votre messagerie pour avoir plus d'informations sur votre téléphone.
+### *Allez dans /messages pour y accéder.*
