@@ -31,7 +31,7 @@ export default function Applications(
     pwd: pwd(print, path),
     mkdir: mkdir(print, path),
     touch: touch(print, path),
-    hello: hello(print, path),
+    hello: hello(print, path)
   };
   const getApp = (
     appName: string

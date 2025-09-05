@@ -1,16 +1,11 @@
-!(/images/ed-title.png?aspect=2&noflow=true&width=1.33)
 
 
-##   Hi there, 
+##   hey, 
 
-#  *I'm Ed H*
+#  *Lionel*
 
-##   • Software Engineer
-##   • Digital Designer
-
+#  *Durieux*
 
 
-
-
-### Welcome to ED-Linux 1.0 LTS
-### →→ Scroll or type "help" to get started
+### Welcome to BroforceOS 9.1
+### > Type "help" to get started
