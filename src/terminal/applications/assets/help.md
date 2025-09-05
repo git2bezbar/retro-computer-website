@@ -3,7 +3,7 @@
 
 
 # Help
-### EDSH is just like BASH except much more limited.
+### BroforceSH is just like BASH except much more limited.
 
 ## • Type*ls* to list directory contents
 
@@ -13,9 +13,6 @@
 
 ## • Use ↑ and ↓ keys to scroll
 
-### Tip: try typing "show -all"
-
-
 ## All commands
-### EDSH, version 0.2.1 
+### BroforceSH, version 0.2.1 
 
