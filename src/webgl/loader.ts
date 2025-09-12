@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Font, FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
-import { mergeBufferGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 type Assists = {
   screenMesh: THREE.Mesh;
@@ -16,6 +15,24 @@ type Assists = {
   environmentMapTexture: THREE.CubeTexture;
 };
 
+const GAME_PASSWORD = "rocky";
+
+function askPassword(): Promise<void> {
+  return new Promise((resolve) => {
+    let ok = false;
+    while (!ok) {
+      const entered = prompt("Entrez le mot de passe pour accéder au jeu :");
+      if (entered === null) continue; // l’utilisateur a cliqué Annuler
+      if (entered === GAME_PASSWORD) {
+        ok = true;
+        resolve();
+      } else {
+        alert("Mot de passe incorrect, réessaie !");
+      }
+    }
+  });
+}
+
 function loadAssists(callback: (assists: Assists) => any) {
   const assists: any = {};
 
@@ -26,20 +43,11 @@ function loadAssists(callback: (assists: Assists) => any) {
   const manager = new THREE.LoadingManager();
 
   manager.onStart = function (url, itemsLoaded, itemsTotal) {
-    console.log(
-      "Started loading file: " +
-        url +
-        ".\nLoaded " +
-        itemsLoaded +
-        " of " +
-        itemsTotal +
-        " files."
-    );
+    console.log("Started loading file:", url);
   };
 
   manager.onLoad = function () {
-    if (!loadingItemsDOM) return;
-    loadingItemsDOM.textContent = `Nearly There...`;
+    if (loadingItemsDOM) loadingItemsDOM.textContent = `Nearly There...`;
 
     console.log("Loading complete!");
     window.setTimeout(() => {
@@ -53,77 +61,58 @@ function loadAssists(callback: (assists: Assists) => any) {
 
   manager.onProgress = function (url, itemsLoaded, itemsTotal) {
     if (!loadingItemsDOM || !loadingBarDOM) return;
-    (loadingBarDOM as HTMLElement).style.transform = `scaleX(${
-      itemsLoaded / itemsTotal
-    })`;
+    (loadingBarDOM as HTMLElement).style.transform = `scaleX(${itemsLoaded / itemsTotal})`;
     loadingItemsDOM.textContent = `${itemsLoaded} of ${itemsTotal} File Loaded: ${url}`;
-    console.log(
-      "Loading file: " +
-        url +
-        ".\nLoaded " +
-        itemsLoaded +
-        " of " +
-        itemsTotal +
-        " files."
-    );
   };
 
-  // Fonts
-  const fontLoader = new FontLoader(manager);
-  fontLoader.load("/fonts/public-pixel.json", (font) => {
-    assists.publicPixelFont = font;
-  });
-  fontLoader.load("/fonts/chill.json", (font) => {
-    assists.chillFont = font;
-  });
+  askPassword().then(() => {
+    // Fonts
+    const fontLoader = new FontLoader(manager);
+    fontLoader.load("/fonts/pixel.json", (font) => {
+      assists.publicPixelFont = font;
+    });
+    fontLoader.load("/fonts/pixel.json", (font) => {
+      assists.chillFont = font;
+    });
 
-  // Texture
+    // Textures
+    const textureLoader = new THREE.TextureLoader(manager);
+    textureLoader.load("/textures/bake-quality-5.jpg", (tex) => {
+      tex.flipY = false;
+      tex.encoding = THREE.sRGBEncoding;
+      assists.bakeTexture = tex;
+    });
 
-  // Texture
-  const textureLoader = new THREE.TextureLoader(manager);
-  textureLoader.load("/textures/bake-quality-5.jpg", (tex) => {
-    tex.flipY = false;
-    tex.encoding = THREE.sRGBEncoding;
-    assists.bakeTexture = tex;
-  });
+    textureLoader.load("/textures/bake_floor-quality-3.jpg", (tex) => {
+      tex.flipY = false;
+      tex.encoding = THREE.sRGBEncoding;
+      assists.bakeFloorTexture = tex;
+    });
 
-  textureLoader.load("/textures/bake_floor-quality-3.jpg", (tex) => {
-    tex.flipY = false;
-    tex.encoding = THREE.sRGBEncoding;
-    assists.bakeFloorTexture = tex;
-  });
-
-  const cubeTextureLoader = new THREE.CubeTextureLoader(manager);
-
-  cubeTextureLoader.load(
-    [
-      `/textures/environmentMap/px.jpg`,
-      `/textures/environmentMap/nx.jpg`,
-      `/textures/environmentMap/py.jpg`,
-      `/textures/environmentMap/ny.jpg`,
-      `/textures/environmentMap/pz.jpg`,
-      `/textures/environmentMap/nz.jpg`,
-    ],
-    (tex) => {
-      assists.environmentMapTexture = tex;
-    }
-  );
-
-  // Mesh
-  const gltfLoader = new GLTFLoader(manager);
-  gltfLoader.load("/models/Commodore710_33.5.glb", (gltf) => {
-    assists.screenMesh = gltf.scene.children.find((m) => m.name === "Screen");
-    assists.computerMesh = gltf.scene.children.find(
-      (m) => m.name === "Computer"
+    const cubeTextureLoader = new THREE.CubeTextureLoader(manager);
+    cubeTextureLoader.load(
+      [
+        `/textures/environmentMap/px.jpg`,
+        `/textures/environmentMap/nx.jpg`,
+        `/textures/environmentMap/py.jpg`,
+        `/textures/environmentMap/ny.jpg`,
+        `/textures/environmentMap/pz.jpg`,
+        `/textures/environmentMap/nz.jpg`,
+      ],
+      (tex) => {
+        assists.environmentMapTexture = tex;
+      }
     );
-    assists.crtMesh = gltf.scene.children.find((m) => m.name === "CRT");
-    assists.keyboardMesh = gltf.scene.children.find(
-      (m) => m.name === "Keyboard"
-    );
-    assists.shadowPlaneMesh = gltf.scene.children.find(
-      (m) => m.name === "ShadowPlane"
-    );
- 
+
+    // Mesh
+    const gltfLoader = new GLTFLoader(manager);
+    gltfLoader.load("/models/Commodore710_33.5.glb", (gltf) => {
+      assists.screenMesh = gltf.scene.children.find((m) => m.name === "Screen");
+      assists.computerMesh = gltf.scene.children.find((m) => m.name === "Computer");
+      assists.crtMesh = gltf.scene.children.find((m) => m.name === "CRT");
+      assists.keyboardMesh = gltf.scene.children.find((m) => m.name === "Keyboard");
+      assists.shadowPlaneMesh = gltf.scene.children.find((m) => m.name === "ShadowPlane");
+    });
   });
 }
 
