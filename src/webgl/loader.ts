@@ -15,7 +15,7 @@ type Assists = {
   environmentMapTexture: THREE.CubeTexture;
 };
 
-const GAME_PASSWORD = "rocky";
+const GAME_PASSWORD = "viveqiota";
 
 function askPassword(): Promise<void> {
   return new Promise((resolve) => {
