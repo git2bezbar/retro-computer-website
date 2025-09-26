@@ -15,7 +15,7 @@ type Assists = {
   environmentMapTexture: THREE.CubeTexture;
 };
 
-const GAME_PASSWORD = "ViveQiota";
+const GAME_PASSWORD = "viveqiota";
 
 function askPassword(): Promise<void> {
   return new Promise((resolve) => {
@@ -23,7 +23,7 @@ function askPassword(): Promise<void> {
     while (!ok) {
       const entered = prompt("Entrez le mot de passe pour accéder au jeu :");
       if (entered === null) continue; // l’utilisateur a cliqué Annuler
-      if (entered === GAME_PASSWORD) {
+      if (entered.toLowerCase() === GAME_PASSWORD) {
         ok = true;
         resolve();
       } else {
