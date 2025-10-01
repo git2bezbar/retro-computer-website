@@ -8,7 +8,7 @@
 
 
 
-Message from Alessandro Massi
+Message d'Alessandro Massi
 
 Leur équipe technique a l'air vraiment bizarre. Je les soupçonne de faire partie d'une secte. Regarde les photos, ça me met mal à l'aise. Tu es sûr de vouloir voler leur code source ?
 

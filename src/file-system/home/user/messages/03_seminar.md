@@ -7,7 +7,7 @@
 
 
 
-Message from Alessandro Massi
+Message d'Alessandro Massi
 
 J'ai obtenu des informations sur leur prochain séminaire. Il aura lieu à Lalande Laborie, à Auriac-du-Périgord.
 Voici une photo du lieu :

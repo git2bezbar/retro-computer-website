@@ -7,7 +7,7 @@
 
 
 
-# List of locations
+# Dernières positions
 Voici les dernières positions connues de votre téléphone.
 
 
